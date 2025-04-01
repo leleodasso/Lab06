@@ -1,5 +1,7 @@
 from database.DB_connect import DBConnect
-from model.Retailer import Retailer
+from model.product import Product
+from model.retailer import Retailer
+from model.sales import Sales
 
 
 class DAO():
@@ -21,14 +23,13 @@ class DAO():
         return res
 
 
-
-    @classmethod
-    def getBrand(cls):
+    @staticmethod
+    def getBrand():
         cnx = DBConnect.get_connection()
         cursor = cnx.cursor(dictionary=True)
 
         query = """select distinct Product_brand
-                    from go_products  """
+                    from go_products """
 
         cursor.execute(query)
 
@@ -38,8 +39,8 @@ class DAO():
         cnx.close()
         return res
 
-    @classmethod
-    def getRetail(cls):
+    @staticmethod
+    def getRetail():
         cnx = DBConnect.get_connection()
         cursor = cnx.cursor(dictionary=True)
 
@@ -56,6 +57,29 @@ class DAO():
         cnx.close()
         return res
 
+    @staticmethod
+    def FiltroTop(anno, brand, retailer):
+        cnx = DBConnect.get_connection()
+        cursor = cnx.cursor(dictionary=True)
+
+        query = """ SELECT * 
+                            FROM go_daily_sales
+                            WHERE YEAR(`Date`) = %s
+                            AND Retailer_code = %s
+                            AND Product_number IN (
+                                SELECT Product_number 
+                                FROM go_products gp  
+                                WHERE gp.Product_brand = %s );
+                        """
+
+        cursor.execute(query, (anno, retailer, brand))
+        res = []
+        for row in cursor:
+            res.append(Sales(**row))
+
+        cursor.close()
+        cnx.close()
+        return res
 
 
 if __name__ == '__main__':

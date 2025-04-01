@@ -9,10 +9,9 @@ class Retailer:
     Country: str
 
     def __eq__(self, other):
+        if not isinstance(other, Retailer):
+            return False
         return self.Retailer_code == other.Retailer_code
 
     def __hash__(self):
         return hash(self.Retailer_code)
-
-    def __str__(self):
-        return f"{self.Retailer_code}: ({self.Retailer_name}) - {self.Type} -  {self.Country}"

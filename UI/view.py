@@ -32,11 +32,11 @@ class View(ft.UserControl):
 
         # dropdown: row1
 
-        self._ddAnno = ft.Dropdown(label="anno",width=200, options=[ft.dropdown.Option("Nesssun filtro")])
+        self._ddAnno = ft.Dropdown(label="anno",width=200, options=[ft.dropdown.Option("Nessun filtro")])
         self._controller.fillddAnno()
-        self._ddBrand = ft.Dropdown(label="brand", width=300, options=[ft.dropdown.Option("Nesssun filtro")])
+        self._ddBrand = ft.Dropdown(label="brand", width=300, options=[ft.dropdown.Option("Nessun filtro")])
         self._controller.fillddBrand()
-        self._ddRetail = ft.Dropdown(label="retailer", width=450, options=[ft.dropdown.Option("Nesssun filtro")])
+        self._ddRetail = ft.Dropdown(label="retailer", width=450, options=[ft.dropdown.Option("Nessun filtro")])
         self._controller.fillddRetail()
 
         row1 = ft.Row([self._ddAnno, self._ddBrand, self._ddRetail], alignment=ft.MainAxisAlignment.CENTER)

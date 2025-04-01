@@ -5,7 +5,6 @@ class Model:
     def __init__(self):
         pass
 
-
     def getAnno(self):
         return DAO.getAnno()
 
@@ -14,3 +13,6 @@ class Model:
 
     def getRetail(self):
         return DAO.getRetail()
+
+    def FiltroTop(self, anno, brand, retailer):
+        return DAO.FiltroTop(anno, brand, retailer)
